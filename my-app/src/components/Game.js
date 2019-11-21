@@ -11,7 +11,8 @@ class Game extends Component {
   // Setting this.state.friends to the friends json array
   state = {
     friends,
-    score
+    score,
+    high
   };
 
   // handleIncrement increases this.state.count by 1
@@ -24,19 +25,16 @@ class Game extends Component {
     }
 
     this.setState({ score: score });
+    this.setState({ high: high });
     chosen.push(id);
-    console.log("The current score is " + score);
-    console.log(" The high score is:" + high);
-  };
+   };
 
   bust = () => {
     // We always use the setState method to update a component's state
     score = 0;
     this.setState({ score: score });
     chosen = [];
-    alert("you already pick that one");
-    console.log("The current score is " + score);
-    console.log(" The high score is:" + high);
+    alert("you already picked that one");
   };
 
   click = id => {
@@ -55,7 +53,10 @@ class Game extends Component {
 
 
       <div>
-        <HelloHeader />
+        <HelloHeader 
+        score = {this.state.score} 
+        high = {this.state.high}
+        />
 
         <Wrapper>
           {this.state.friends.map(friend => (

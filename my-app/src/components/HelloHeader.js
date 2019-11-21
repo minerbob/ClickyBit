@@ -1,13 +1,13 @@
 import React from "react";
 
-function HelloHeader() {
+function HelloHeader(props) {
     return (
         <div>
             <nav className="navbar">
                 <ul>
                     <li><a href="/">Clicky Game</a></li>
                     <li>Click an image to begin!</li>
-                    <li>Score: 0 | Top Score: 0</li>
+                    <li>Score: {props.score} | Top Score: {props.high}</li>
                 </ul>
             </nav>
         </div>
