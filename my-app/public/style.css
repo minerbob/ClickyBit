@@ -1,0 +1,26 @@
+
+.navbar li {
+    width: 33.3%;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 900
+}
+.navbar {
+    background: #5133a4;
+    position: fixed;
+    width: 100%;
+    color: #fff;
+
+}
+.header {
+    background: #3393a4;
+    width: 100%;
+
+}
+.wrapper {
+display: flex;
+
+}
