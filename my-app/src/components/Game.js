@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Card from "./Card";
 import Wrapper from "./Wrapper";
 import friends from "../friends.json";
+import HelloHeader from './HelloHeader';
 let chosen = [];
 let high = 0;
 let score = 0;
@@ -9,37 +10,65 @@ let score = 0;
 class Game extends Component {
   // Setting this.state.friends to the friends json array
   state = {
-    friends
+    friends,
+    score
   };
 
+  // handleIncrement increases this.state.count by 1
+  handleIncrement = (id) => {
+    // We always use the setState method to update a component's state
+    score++;
 
+    if (score > high) {
+      high = score;
+    }
+
+    this.setState({ score: score });
+    chosen.push(id);
+    console.log("The current score is " + score);
+    console.log(" The high score is:" + high);
+  };
+
+  bust = () => {
+    // We always use the setState method to update a component's state
+    score = 0;
+    this.setState({ score: score });
+    chosen = [];
+    alert("you already pick that one");
+    console.log("The current score is " + score);
+    console.log(" The high score is:" + high);
+  };
 
   click = id => {
-    // Filter this.state.friends for friends with an id not equal to the id being removed
-    let friends = this.state.friends;
-    let contains = [];
-    contains = chosen.includes(id) ? true : false;
-    chosen.push(id);
-    console.log(contains);
-    friends.sort(() => 0.5 - Math.random());
+
+    // true false, is it there? 
+    chosen.includes(id) ? this.bust() : this.handleIncrement(id);
     // Set this.state.friends equal to the new friends array
+    let friends = this.state.friends;
+    friends.sort(() => 0.5 - Math.random());
     this.setState({ friends });
   };
 
-  // Map over this.state.friends and render a FriendCard component for each friend object
+  // Map over this.state.friends and render a Card component for each friend object
   render() {
     return (
-      <Wrapper>
-        {this.state.friends.map(friend => (
-          <Card
-            click={this.click}
-            id={friend.id}
-            key={friend.id}
-            name={friend.name}
-            image={friend.image}
-          />
-        ))}
-      </Wrapper>
+
+
+      <div>
+        <HelloHeader />
+
+        <Wrapper>
+          {this.state.friends.map(friend => (
+            <Card
+              click={this.click}
+              id={friend.id}
+              key={friend.id}
+              name={friend.name}
+              image={friend.image}
+            />
+          ))}
+        </Wrapper>
+      </div>
     );
   }
 }
